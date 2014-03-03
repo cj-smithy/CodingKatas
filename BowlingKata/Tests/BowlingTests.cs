@@ -10,20 +10,36 @@ namespace BowlingKata.Tests
     [TestFixture]
     class BowlingTests
     {
+        BowlingGame _game = new BowlingGame();
+
+        [SetUp]
+        public void SetUp()
+        {
+            _game = BuildGame();
+        }
+        
         [TestCase]
         public void TestGutterGameScoresZero()
         {
-            var game = BuildGame();
-            RollMany(game, 20, 0); 
-            Assert.AreEqual(0, game.GetScore());
+            RollMany(_game, 20, 0);
+            Assert.AreEqual(0, _game.GetScore());
         }
 
         [TestCase]
         public void TestAllOnesGame()
         {
-            var game = BuildGame();
-            RollMany(game, 20, 1);
-            Assert.AreEqual(20, game.GetScore());
+            RollMany(_game, 20, 1);
+            Assert.AreEqual(20, _game.GetScore());
+        }
+
+        [TestCase]
+        public void TestOneSpare()
+        {
+            _game.Roll(5);
+            _game.Roll(5);  // spare!
+            _game.Roll(3);
+            RollMany(_game, 17, 0);
+            Assert.AreEqual(16, _game.GetScore());
         }
 
         #region Helper stuff
@@ -36,7 +52,7 @@ namespace BowlingKata.Tests
         {
             for (int i = 0; i < rolls; i++)
             {
-                game.roll(pinsKnockedDown);
+                game.Roll(pinsKnockedDown);
             }
         }
         #endregion Helper stuff

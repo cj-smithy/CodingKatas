@@ -7,16 +7,23 @@ namespace BowlingKata
 {
     public class BowlingGame
     {
-        int _score = 0;
+        int[] _rolls = new int[20];
+        int _currentRoll = 0;
 
-        public void roll(int pinsKnockedDown)
+        public void Roll(int pinsKnockedDown)
         {
-            _score += pinsKnockedDown;
+            _rolls[_currentRoll] = pinsKnockedDown;
+            _currentRoll++;
         }
 
         public int GetScore()
         {
-            return _score;
+            int score = 0;
+            for (int i = 0; i < _rolls.Length; i++)
+            {
+                score += _rolls[i];
+            }
+            return score;
         }
     }
 }
