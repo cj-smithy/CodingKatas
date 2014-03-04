@@ -35,25 +35,41 @@ namespace BowlingKata.Tests
         [TestCase]
         public void TestOneSpare()
         {
-            _game.Roll(5);
-            _game.Roll(5);  // spare!
+            RollSpare();
             _game.Roll(3);
             RollMany(_game, 17, 0);
             Assert.AreEqual(16, _game.GetScore());
         }
 
-        #region Helper stuff
-        private static BowlingGame BuildGame()
+        [TestCase]
+        public void TestOneStrike()
         {
-            return new BowlingGame();
+            _game.Roll(10);
+            _game.Roll(3);
+            _game.Roll(4);
+            RollMany(_game, 16, 0);
+            Assert.AreEqual(24, _game.GetScore());
         }
 
+        #region Helper stuff
+        private void RollSpare()
+        {
+            _game.Roll(5);
+            _game.Roll(5); // spare!
+        }
+
+        
         private static void RollMany(BowlingGame game, int rolls, int pinsKnockedDown)
         {
             for (int i = 0; i < rolls; i++)
             {
                 game.Roll(pinsKnockedDown);
             }
+        }
+
+        private static BowlingGame BuildGame()
+        {
+            return new BowlingGame();
         }
         #endregion Helper stuff
     }
