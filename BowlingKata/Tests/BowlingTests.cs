@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace BowlingKata.Tests
 {
     [TestFixture]
-    class BowlingTests
+    internal class BowlingTests
     {
-        BowlingGame _game = new BowlingGame();
-
         [SetUp]
         public void SetUp()
         {
             _game = BuildGame();
         }
-        
+
+        private BowlingGame _game = new BowlingGame();
+
         [TestCase]
         public void TestGutterGameScoresZero()
         {
@@ -58,14 +53,13 @@ namespace BowlingKata.Tests
             Assert.AreEqual(300, _game.GetScore());
         }
 
-        #region Helper stuff
         private void RollSpare()
         {
             _game.Roll(5);
             _game.Roll(5); // spare!
         }
 
-        
+
         private static void RollMany(BowlingGame game, int rolls, int pinsKnockedDown)
         {
             for (int i = 0; i < rolls; i++)
@@ -78,6 +72,5 @@ namespace BowlingKata.Tests
         {
             return new BowlingGame();
         }
-        #endregion Helper stuff
     }
 }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BowlingKata
+﻿namespace BowlingKata
 {
     public class BowlingGame
     {
-        readonly int[] _rolls = new int[20];
-        int _currentRoll;
+        private readonly int[] _rolls = new int[20];
+        private int _currentRoll;
 
         public void Roll(int pinsKnockedDown)
         {
