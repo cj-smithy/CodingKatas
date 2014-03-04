@@ -11,7 +11,7 @@ namespace BowlingKata.Tests
             _game = BuildGame();
         }
 
-        private BowlingGame _game = new BowlingGame();
+        private Game _game = new Game();
 
         [TestCase]
         public void TestGutterGameScoresZero()
@@ -53,6 +53,12 @@ namespace BowlingKata.Tests
             Assert.AreEqual(300, _game.GetScore());
         }
 
+        [TestCase, ExpectedException(typeof(System.ApplicationException))]
+        public void TestTooManyRolls()
+        {
+            RollMany(_game, 24, 0);
+        }
+
         private void RollSpare()
         {
             _game.Roll(5);
@@ -60,7 +66,7 @@ namespace BowlingKata.Tests
         }
 
 
-        private static void RollMany(BowlingGame game, int rolls, int pinsKnockedDown)
+        private static void RollMany(Game game, int rolls, int pinsKnockedDown)
         {
             for (int i = 0; i < rolls; i++)
             {
@@ -68,9 +74,9 @@ namespace BowlingKata.Tests
             }
         }
 
-        private static BowlingGame BuildGame()
+        private static Game BuildGame()
         {
-            return new BowlingGame();
+            return new Game();
         }
     }
 }

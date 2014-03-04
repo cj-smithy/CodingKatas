@@ -1,6 +1,6 @@
 ﻿namespace BowlingKata
 {
-    public class BowlingGame
+    public class Game
     {
         private readonly int[] _rolls = new int[20];
         private int _currentRoll;
