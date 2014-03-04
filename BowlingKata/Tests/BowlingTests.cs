@@ -51,6 +51,13 @@ namespace BowlingKata.Tests
             Assert.AreEqual(24, _game.GetScore());
         }
 
+        [TestCase]
+        public void TestPerfectGame()
+        {
+            RollMany(_game, 12, 10);
+            Assert.AreEqual(300, _game.GetScore());
+        }
+
         #region Helper stuff
         private void RollSpare()
         {

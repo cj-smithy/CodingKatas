@@ -7,8 +7,8 @@ namespace BowlingKata
 {
     public class BowlingGame
     {
-        int[] _rolls = new int[20];
-        int _currentRoll = 0;
+        readonly int[] _rolls = new int[20];
+        int _currentRoll;
 
         public void Roll(int pinsKnockedDown)
         {
@@ -21,34 +21,48 @@ namespace BowlingKata
             int frameIndex = 0;
             for (int frame = 0; frame < 10; frame++)
             {
-                int frameScore = _rolls[frameIndex];
-                if (IsStrike(frameScore))
+                if (IsSrike(frameIndex))
                 {
-                    score += frameScore + _rolls[frameIndex + 1] + _rolls[frameIndex + 2];
-                    frameIndex ++;
+                    score += 10 + StrikeBonus(frameIndex);
+                    frameIndex++;
+                }
+                else if (IsSpare(frameIndex))
+                {
+                    score += 10 + SpareBonus(frameIndex);
+                    frameIndex += 2;
                 }
                 else
                 {
-                    frameScore += _rolls[frameIndex + 1];
-                    if (IsSpare(frameScore) && frameIndex < 20)
-                    {
-                        frameScore += _rolls[frameIndex+2];
-                    }
-                    score += frameScore;
+                    score += SumOfBallsInFrame(frameIndex);
                     frameIndex += 2;
                 }
             }
             return score;
         }
 
-        private static bool IsStrike(int frameScore)
+        private int StrikeBonus(int frameIndex)
         {
-            return frameScore >= 10;
+            return _rolls[frameIndex + 1] + _rolls[frameIndex + 2];
         }
 
-        private bool IsSpare(int frameScore)
+        private int SpareBonus(int frameIndex)
         {
-            return frameScore >= 10;
+            return _rolls[frameIndex + 2];
+        }
+
+        private int SumOfBallsInFrame(int frameIndex)
+        {
+            return _rolls[frameIndex] + _rolls[frameIndex + 1];
+        }
+
+        private bool IsSpare(int frameIndex)
+        {
+            return _rolls[frameIndex] + _rolls[frameIndex + 1] >= 10;
+        }
+
+        private bool IsSrike(int frameIndex)
+        {
+            return _rolls[frameIndex] >= 10;
         }
     }
 }
