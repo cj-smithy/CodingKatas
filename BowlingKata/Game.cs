@@ -1,35 +1,79 @@
-﻿namespace BowlingKata
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework.Constraints;
+
+namespace BowlingKata
 {
     public class Game
     {
-        private readonly int[] _rolls = new int[20];
-        private int _currentRoll;
+        private readonly List<Frame> _frames = new List<Frame>();
+        private int _currentFrame;
+
+        public Game()
+        {
+            SetupEmptyGame();
+        }
+
+        private void SetupEmptyGame()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _frames.Add(new Frame());
+            }
+        }
 
         public void Roll(int pinsKnockedDown)
         {
-            _rolls[_currentRoll++] = pinsKnockedDown;
+            if (_frames[_currentFrame].HasEnded)
+            {
+                _currentFrame++;
+            }
+
+            if (_currentFrame >= _frames.Count)
+            {
+                throw new ApplicationException("Maximum number of frames exceeded.");
+            }
+
+            _frames[_currentFrame].Roll(pinsKnockedDown);
+
+            if (_currentFrame >= 10)
+            {
+                if (_frames[_currentFrame].IsStrike())
+                {
+                    // is this the 10th frame
+                    if (_currentFrame == 10)
+                    {
+                        _frames.Add(new Frame());
+                    }
+                    else if (_currentFrame == 11)
+                    {
+                        _frames.Add(new Frame(1));
+                    }
+                }
+                else if (_frames[_currentFrame].IsSpare() && _currentFrame == 11)
+                {
+                    _frames.Add(new Frame(1));
+                }
+            }
         }
 
         public int GetScore()
         {
             int score = 0;
-            int frameIndex = 0;
-            for (int frame = 0; frame < 10; frame++)
+            for (int frameIndex = 0; frameIndex < _frames.Count; frameIndex++)
             {
-                if (IsSrike(frameIndex))
+                var frame = _frames[frameIndex];
+                if (frame.IsStrike())
                 {
                     score += 10 + StrikeBonus(frameIndex);
-                    frameIndex++;
                 }
-                else if (IsSpare(frameIndex))
+                else if (frame.IsSpare())
                 {
-                    score += 10 + SpareBonus(frameIndex);
-                    frameIndex += 2;
+                    score += 10 + (frameIndex < _frames.Count ? SpareBonus(frameIndex) : 0);
                 }
                 else
                 {
-                    score += SumOfBallsInFrame(frameIndex);
-                    frameIndex += 2;
+                    score += frame.GetScore();
                 }
             }
             return score;
@@ -37,27 +81,12 @@
 
         private int StrikeBonus(int frameIndex)
         {
-            return _rolls[frameIndex + 1] + _rolls[frameIndex + 2];
+            return _frames[frameIndex+1].GetScore();
         }
 
         private int SpareBonus(int frameIndex)
         {
-            return _rolls[frameIndex + 2];
-        }
-
-        private int SumOfBallsInFrame(int frameIndex)
-        {
-            return _rolls[frameIndex] + _rolls[frameIndex + 1];
-        }
-
-        private bool IsSpare(int frameIndex)
-        {
-            return _rolls[frameIndex] + _rolls[frameIndex + 1] >= 10;
-        }
-
-        private bool IsSrike(int frameIndex)
-        {
-            return _rolls[frameIndex] >= 10;
+            return _frames[frameIndex + 1].GetScore();
         }
     }
 }

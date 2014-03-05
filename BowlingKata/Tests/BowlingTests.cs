@@ -46,17 +46,17 @@ namespace BowlingKata.Tests
             Assert.AreEqual(24, _game.GetScore());
         }
 
+        [TestCase, ExpectedException(typeof(System.ApplicationException))]
+        public void TestTooManyRolls()
+        {
+            RollMany(_game, 21, 0);
+        }
+
         [TestCase]
         public void TestPerfectGame()
         {
             RollMany(_game, 12, 10);
             Assert.AreEqual(300, _game.GetScore());
-        }
-
-        [TestCase, ExpectedException(typeof(System.ApplicationException))]
-        public void TestTooManyRolls()
-        {
-            RollMany(_game, 24, 0);
         }
 
         private void RollSpare()
