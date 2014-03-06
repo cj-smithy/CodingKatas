@@ -69,13 +69,11 @@ namespace Euler
 
         internal static bool IsPrimeNumber(long number)
         {
-           // int limit = (int)Math.Ceiling((double)number/2);
-            for (long i = 2; i <= (int)Math.Ceiling((double)number / i); i++)
+            if (number == 1) return false;
+            if (number == 2) return true;
+            for (int i = 2; i <= Math.Ceiling(Math.Sqrt(number)); ++i)
             {
-                if (number%i == 0)
-                {
-                    return false;
-                }
+                if (number % i == 0) return false;
             }
             return true;
         }
