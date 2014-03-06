@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Euler
 {
@@ -63,6 +65,51 @@ namespace Euler
         internal static int SumFibonacciSequenceUpToMaximum(int maximum, bool evenOnly = false)
         {
             return GetFibonacciSequenceUpToMaximum(maximum, evenOnly).Sum();
+        }
+
+        internal static bool IsPrimeNumber(long number)
+        {
+           // int limit = (int)Math.Ceiling((double)number/2);
+            for (long i = 2; i <= (int)Math.Ceiling((double)number / i); i++)
+            {
+                if (number%i == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        internal static long[] GetPrimeNumbers(long maximum)
+        {
+            var primes = new List<long>();
+            for (int i = 2; i < maximum; i++)
+            {
+                if (IsPrimeNumber(i))
+                {
+                    primes.Add(i);
+                }
+            }
+            return primes.ToArray();
+        }
+
+        internal static long[] GetPrimeFactors(long number)
+        {
+            long[] primes = GetPrimeNumbers(number);
+            return primes.Where(t => number%t == 0).ToArray();
+        }
+
+        //internal static long[] GetPrimeFactors2(long number)
+        //{
+            
+        //}
+
+
+        
+        internal static long GetLargestPrimeFactor(long number)
+        {
+            var primes = GetPrimeFactors(number);
+            return primes[primes.Length - 1];
         }
     }
 }

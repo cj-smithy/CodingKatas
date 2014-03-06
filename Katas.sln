@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BowlingKata", "BowlingKata\BowlingKata.csproj", "{3BC481B6-851D-44B4-AC62-5CF3F4A7A9DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euler", "Euler\Euler.csproj", "{81774327-0F39-479F-BA32-084F28DB2D6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{3BC481B6-851D-44B4-AC62-5CF3F4A7A9DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BC481B6-851D-44B4-AC62-5CF3F4A7A9DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BC481B6-851D-44B4-AC62-5CF3F4A7A9DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81774327-0F39-479F-BA32-084F28DB2D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81774327-0F39-479F-BA32-084F28DB2D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81774327-0F39-479F-BA32-084F28DB2D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81774327-0F39-479F-BA32-084F28DB2D6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

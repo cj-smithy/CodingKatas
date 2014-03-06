@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections.ObjectModel;
+using System.Runtime.InteropServices.WindowsRuntime;
 using NUnit.Framework;
 
 namespace Euler
@@ -59,5 +62,66 @@ namespace Euler
         {
             Assert.AreEqual(Euler.SumFibonacciSequenceUpToMaximum(100, true), 44);
         }
+
+        [TestCase]
+        public void TestTwoIsPrimeNumber()
+        {
+            Assert.IsTrue(Euler.IsPrimeNumber(2));
+        }
+
+        [TestCase]
+        public void TestFourIsNotPrimeNumber()
+        {
+            Assert.IsFalse(Euler.IsPrimeNumber(4));
+        }
+
+        [TestCase]
+        public void TestThreeIsPrimeNumber()
+        {
+            Assert.IsTrue(Euler.IsPrimeNumber(3));
+        }
+
+        [TestCase]
+        public void TestTwentyThreeIsPrimeNumber()
+        {
+            Assert.IsTrue(Euler.IsPrimeNumber(23));
+        }
+
+        [TestCase]
+        public void Test691IsPrimeNumber()
+        {
+            Assert.IsTrue(Euler.IsPrimeNumber(691));
+        }
+
+        [TestCase]
+        public void Test693IsNotPrimeNumber()
+        {
+            Assert.IsFalse(Euler.IsPrimeNumber(693));
+        }
+
+        [TestCase]
+        public void TestGetPrimeNumbersUnder2()
+        {
+            Assert.AreEqual(Euler.GetPrimeNumbers(2).Length, 0);
+        }
+
+        [TestCase]
+        public void TestGetPrimeNumbersUnder22()
+        {
+            CollectionAssert.AreEqual(Euler.GetPrimeNumbers(22), new []{2, 3, 5, 7, 11, 13, 17, 19});
+        }
+
+        [TestCase]
+        public void TestGetPrimeFactorsOf13195()
+        {
+            CollectionAssert.AreEqual(Euler.GetPrimeFactors(13195), new[] {5, 7, 13, 29});
+        }
+
+        [TestCase]
+        public void TestGetLargestPrimeFactorOf13195()
+        {
+            Assert.AreEqual(Euler.GetLargestPrimeFactor(13195), 29 );
+        }
+
     }
 }

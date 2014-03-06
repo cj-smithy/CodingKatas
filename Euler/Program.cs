@@ -16,6 +16,9 @@ namespace Euler
             Console.WriteLine("Sum of even Fibonacci numbers up to 4 million = {0}",
                 Euler.SumFibonacciSequenceUpToMaximum(4000000, true));
 
+            Console.WriteLine("Largest prime factor of 600851475143 = {0}",
+                Euler.GetLargestPrimeFactor(600851475143));
+
             Console.Read();
 
 
