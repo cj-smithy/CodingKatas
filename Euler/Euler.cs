@@ -81,7 +81,7 @@ namespace Euler
         internal static long[] GetPrimeNumbers(long maximum)
         {
             var primes = new List<long>();
-            for (int i = 2; i < maximum; i++)
+            for (int i = 2; i < Math.Ceiling(Math.Sqrt(maximum)); i++)
             {
                 if (IsPrimeNumber(i))
                 {
@@ -96,18 +96,45 @@ namespace Euler
             long[] primes = GetPrimeNumbers(number);
             return primes.Where(t => number%t == 0).ToArray();
         }
-
-        //internal static long[] GetPrimeFactors2(long number)
-        //{
-            
-        //}
-
-
         
         internal static long GetLargestPrimeFactor(long number)
         {
             var primes = GetPrimeFactors(number);
             return primes[primes.Length - 1];
+        }
+
+        internal static bool IsPalindrome(int number)
+        {
+            string numberAsString = Convert.ToString(number);
+            return numberAsString.Equals(ReverseString(numberAsString));
+        }
+
+        internal static string ReverseString(string input)
+        {
+            var reversed = new char[input.Length];
+            for (int i = 0; i < input.Length; i++)
+            {
+                reversed[input.Length-1-i] = input[i];
+            }
+            return new string(reversed);
+        }
+
+        internal static int FindLargestPalindrome(int digits)
+        {
+            int largestPalindrome = 0;
+            int max = (int)Math.Pow(10,digits) - 1;
+            for (int i = max; i > 1; i--)
+            {
+                for (int j = i; j > 1; j--)
+                {
+                    int product = i*j;
+                    if (product > largestPalindrome && IsPalindrome(product))
+                    {
+                        largestPalindrome = product;
+                    }
+                }
+            }
+            return largestPalindrome;
         }
     }
 }

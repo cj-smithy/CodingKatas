@@ -19,6 +19,9 @@ namespace Euler
             Console.WriteLine("Largest prime factor of 600851475143 = {0}",
                 Euler.GetLargestPrimeFactor(600851475143));
 
+            Console.WriteLine("Largest palindrome made from the product of two 3-digit numbers = {0}",
+                Euler.FindLargestPalindrome(3));
+
             Console.Read();
 
 

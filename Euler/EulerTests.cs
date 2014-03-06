@@ -123,5 +123,28 @@ namespace Euler
             Assert.AreEqual(Euler.GetLargestPrimeFactor(13195), 29 );
         }
 
+        [TestCase]
+        public void TestIs99Palindrome()
+        {
+            Assert.IsTrue(Euler.IsPalindrome(99));
+        }
+
+        [TestCase]
+        public void TestIs10001Palindrome()
+        {
+            Assert.IsTrue(Euler.IsPalindrome(10001));
+        }
+
+        [TestCase]
+        public void TestIs1231Palindrome()
+        {
+            Assert.IsFalse(Euler.IsPalindrome(1231));
+        }
+
+        [TestCase]
+        public void TestFindLargestPalindromeThatIsMultipleOfTwoTwoDigitNumbers()
+        {
+            Assert.AreEqual(Euler.FindLargestPalindrome(2),9009);
+        }
     }
 }
